@@ -66,6 +66,13 @@ public class Main {
 		cross();
 		
 		for(int y = 0; y < Nr; y++){
+			for(int x = 0; x < Nc; x++){
+				if(gridc[y][x] == -2 || gridr[y][x] == -2)		System.out.print("x");
+				else if(gridc[y][x] > 0 || gridr[y][x] > 0)		System.out.print("#");
+				else if(gridc[y][x] == 0 || gridr[y][x] == 0)	System.out.print(" ");
+			}
+			System.out.print("---");
+			
 			for(int x : gridr[y]){
 				switch(x){
 					case 0 :	System.out.print(" ");	break;
@@ -74,9 +81,11 @@ public class Main {
 					default :	System.out.print(x);	break;
 				}
 			}
-			System.out.print("\t");
+			System.out.print("---");
 			
 			for(int x : gridc[y]){
+//				if(x == -2) System.out.print(" "); 
+//				else System.out.print(x);
 				switch(x){
 					case 0 :	System.out.print(" ");	break;
 					case -1 :	System.out.print("#");	break;
@@ -100,9 +109,7 @@ public class Main {
 				for(int x = 0; x < row[n].size(); x++){
 					int num = row[n].get(x);
 					for(int p = 0; p < num - space; p++){
-						gridr[n][pointer] = x + 1;
-//						if(gridc[n][pointer] < 0)	
-							gridc[n][pointer] = -1;
+						gridr[n][pointer] = x+1;
 						pointer += 1;
 					}
 					if(pointer != Nc){
@@ -117,7 +124,6 @@ public class Main {
 						pointer += space;
 						for(int p = 0; p < num - space; p++){
 							gridr[n][pointer] = x+1;
-							if(gridc[n][pointer] < 0)	gridc[n][pointer] = -1;
 							pointer += 1;
 						}
 						pointer += 1;
@@ -135,9 +141,10 @@ public class Main {
 			if(space == 0){
 				for(int y = 0; y < col[n].size(); y++){
 					int num = col[n].get(y);
+					System.out.println(num);
 					for(int p = 0; p < num - space; p++){
-						gridc[n][pointer] = y+1;
-						if(gridr[n][pointer] < 0)	gridr[n][pointer] = -1;
+						System.out.println(pointer);
+						gridc[pointer][n] = y+1;
 						pointer += 1;
 					}
 					if(pointer != Nc){
@@ -145,6 +152,7 @@ public class Main {
 						pointer += 1;
 					}
 				}
+				System.out.println();
 			}else {
 				for(int y = 0; y < col[n].size(); y++){
 					int num = col[n].get(y);
@@ -152,7 +160,6 @@ public class Main {
 						pointer += space;
 						for(int p = 0; p < num - space; p++){
 							gridc[pointer][n] = y+1;
-							if(gridr[n][pointer] < 0)	gridr[n][pointer] = -1;
 							pointer += 1;
 						}
 						pointer += 1;
@@ -169,9 +176,7 @@ public class Main {
 		for(int j = 0; j < Nr; j++){
 			for(int y = 0; y < row[j].size(); y++){
 				int pointer = 0;
-				System.out.println(gridr[pointer][y]);
 			}
-			System.out.println();
 		}
 	}
 }
