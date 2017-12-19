@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class Main {
 	StreamTokenizer st;
 	
-	int Nr, Nc, Mr[], Mc[], gridr[][], gridc[][];
+	int Nr, Nc, Mr[], Mc[], gridr[][], gridc[][], grid[][];
 	
 	ArrayList<Integer> row[], col[];
 	
@@ -58,25 +58,28 @@ public class Main {
 		//setup table
 		gridc = new int[Nr][Nc];
 		gridr = new int[Nr][Nc];
+		grid = new int[Nr][Nc];
 		
 		//1. Mark the collapse box
 		Initialize();
+		merge();
 		
 		//2. Cross the box that used
 		cross();
 		
 		for(int y = 0; y < Nr; y++){
 			for(int x = 0; x < Nc; x++){
-				if(gridc[y][x] == -2 || gridr[y][x] == -2)		System.out.print("x");
-				else if(gridc[y][x] > 0 || gridr[y][x] > 0)		System.out.print("#");
-				else if(gridc[y][x] == 0 || gridr[y][x] == 0)	System.out.print(" ");
+				switch(grid[y][x]){
+					case 0 :	System.out.print(" ");	break;
+					case -1 :	System.out.print("#");	break;
+					case -2 :	System.out.print("x");	break;
+				}
 			}
 			System.out.print("---");
 			
 			for(int x : gridr[y]){
 				switch(x){
 					case 0 :	System.out.print(" ");	break;
-					case -1 :	System.out.print("#");	break;
 					case -2 :	System.out.print("x");	break;
 					default :	System.out.print(x);	break;
 				}
@@ -88,7 +91,6 @@ public class Main {
 //				else System.out.print(x);
 				switch(x){
 					case 0 :	System.out.print(" ");	break;
-					case -1 :	System.out.print("#");	break;
 					case -2 :	System.out.print("x");	break;
 					default :	System.out.print(x);	break;
 				}
@@ -97,6 +99,22 @@ public class Main {
 			System.out.println();
 		}
 		
+	}
+	
+	public void merge(){
+		for(int y = 0; y < Nr; y++){
+			for(int x = 0; x < Nc; x++){
+//				grid
+				if(gridc[y][x] == -2 || gridr[y][x] == -2)		grid[y][x] = -2;
+				else if(gridc[y][x] > 0 || gridr[y][x] > 0)		grid[y][x] = -1;
+				else if(gridc[y][x] == 0 || gridr[y][x] == 0)	grid[y][x] = 0;
+				
+//				grid row
+				
+				
+//				grid column
+			}
+		}
 	}
 	
 	public void Initialize(){
